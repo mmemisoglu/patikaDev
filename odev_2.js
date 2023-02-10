@@ -1,4 +1,4 @@
-
+//Ödev-2
 
 const post = ["Post1", "Post2", "Post3"]
 
