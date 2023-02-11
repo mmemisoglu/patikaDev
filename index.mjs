@@ -1,27 +1,23 @@
-import http from "http";
 
-const server = http.createServer((req,res) => {
-    const url = req.url;
-    if(url === '/'){
-        res.writeHead(200, {'Content-Type': 'text/html'})
-        res.write("<h2>Anasayfa sayfasına hoş geldiniz.</h2>")
-    }else if(url === '/index'){
-        res.writeHead(200,{'Content-Type': 'text/html'})
-        res.write("<h2>Index sayfasına hoş geldiniz.</h2>")
-    }else if(url === '/about'){
-        res.writeHead(200,{'Content-Type': 'text/html'})
-        res.write("<h2>Hakkimizda sayfasına hoş geldiniz.</h2>")
-    }else if(url === '/contact'){
-        res.writeHead(200,{'Content-Type': 'text/html'})
-        res.write("<h2>Iletisim sayfasına hoş geldiniz.</h2>")
-    }else{
-        res.writeHead(404,{'Content-Type': 'text/html'})
-        res.write("<h2>Sayfa bulunamadı</h2>")
-    }
-    res.end()
+import express from "express"
+
+const app = express()
+
+app.get('/',(req,res) => {
+    res.status(200).send('Index Page')
+})
+app.get('/about',(req,res) => {
+    res.status(200).send('About Page')
+})
+app.get('/contact',(req,res) => {
+    res.status(200).send('Contact Page')
+})
+app.get('*',(req,res) => {
+    res.status(404).send('The requested page was not found')
 })
 
-const port = 5001
-server.listen(port, () => {
-    console.log(`Sunucu port ${port} de başlatıldı.`)
+const port = 3000
+
+app.listen(port,() => {
+    console.log(`Sunucu port ${port} da çalışmaya başladı`)
 })
